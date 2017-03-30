@@ -10,7 +10,7 @@ before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
     @posts = @group.posts.recent.paginate(:page => params[:page], :per_page => 5)
   end
 
-   def edit
+  def edit
   end
 
 def new
@@ -29,20 +29,20 @@ def new
   end
 
   def update
-
-   if @group.update(group_params)
-     redirect_to groups_path, notice: "Update Success"
-   else
-     render :edit
-   end
-
-
- def destroy
+    if @group.update(group_params)
+      redirect_to groups_path, notice: "Update Success"
+    else
+      render :edit
+    end
+  end
 
 
-   @group.destroy
-   redirect_to groups_path, alert: "Group deleted"
- end
+  def destroy
+    @group.destroy
+    redirect_to groups_path, alert: "Group deleted"
+  end
+
+
 
    private
    def find_group_and_check_permission
@@ -53,11 +53,7 @@ def new
        end
      end
 
-     def group_params
-       params.require(:group).permit(:title, :description)
-     end
 
-   end
    def group_params
      params.require(:group).permit(:title, :description)
    end

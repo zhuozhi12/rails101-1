@@ -1,7 +1,14 @@
 <div class="col-md-12">
   <div class="group">
+    <span class="pull-right">
+  <% if current_user && current_user.is_member_of?(@group) %>
+    <label class="label label-success"> 群组成员 </label>
+  <% else %>
+    <label class="label label-warning"> 不是群组成员 </label>
+  <% end %>
+</span>
      <%= link_to("發表文章", new_group_post_path(@group), class: "btn btn-default pull-right")%>
-    <%= link_to("Edit", edit_group_path(@group), class: "btn btn-primary pull-right")%>
+
   </div>
   <h2><%= @group.title %></h2>
   <p><%= @group.description %></p>
@@ -21,12 +28,14 @@
             <td><%= post.user.email %></td>
             <td><%= post.created_at %></td>
           </tr>
+
         <% end %>
+
       </tbody>
     </table>
 
     <div class="text-center">
          <%= will_paginate @posts %>
       </div>
-      
+
 </div>
